@@ -1,11 +1,11 @@
 import algorithm, common, os, sequtils, strformat, strutils, tables, times
-import day01, day02 #, day03, day04, day05, day06, day06, day06, day07, day08, day09, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day23, day24, day25, day25
+import day01, day02, day03 #, day04, day05, day06, day06, day06, day07, day08, day09, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day23, day24, day25, day25
 
 var SOLUTIONS*: Table[int, proc (input: string): Answer]
 
 SOLUTIONS[1] = day01.solve
 SOLUTIONS[2] = day02.solve
-# SOLUTIONS[3] = day03.solve
+SOLUTIONS[3] = day03.solve
 # SOLUTIONS[4] = day04.solve
 # SOLUTIONS[5] = day05.solve
 # SOLUTIONS[6] = day06.solve
