@@ -6,8 +6,11 @@ authors = ["Barnaby Gray <barnybug@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 pytest = "*"
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
 
 [build-system]
 requires = ["poetry-core"]
