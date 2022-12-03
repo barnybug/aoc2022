@@ -6,11 +6,17 @@ from .utils import input_data
 
 class MarkdownOutput:
     def header(self):
-        print("# Solutions")
+        print("# :rocket: Solutions")
         print()
 
+    logos = {
+        1: ":christmas_tree:",
+        25: ":santa:",
+    }
+
     def day(self, day, answer):
-        print(f"## Day {day}")
+        logo = self.logos.get(day, "")
+        print(f"## {logo} Day {day}")
         print()
         print(f"- Part 1: {answer.part1}")
         print(f"- Part 2: {answer.part2}")
