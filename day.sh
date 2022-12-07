@@ -1,6 +1,7 @@
 #!/bin/bash
 
 day=$(date +%02d)
+sday=$(date +%1d)
 testinput="tests/test$day.txt"
 input="aoc2022/inputs/input$day.txt" 
 daycode="aoc2022/day$day.py"
@@ -30,3 +31,6 @@ EOF
 fi
 
 code $input $testinput $testcode $daycode
+xdg-open https://adventofcode.com/2022/day/$sday >/dev/null
+echo
+echo "go!"
