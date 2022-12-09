@@ -13,3 +13,23 @@ class Answer(NamedTuple):
 def input_data(day):
     file = input_dir / f"input{day:02d}.txt"
     return file.read_text()
+
+class Point(NamedTuple):
+    x: int
+    y: int
+
+    def __add__(self, b):
+        return Point(self.x + b.x, self.y + b.y)
+
+    def __sub__(self, b):
+        return Point(self.x - b.x, self.y - b.y)
+
+    def __str__(self):
+        return "(%d,%d)" % (self.x, self.y)
+
+DIRS = {
+    'L': Point(-1, 0),
+    'U': Point(0, 1),
+    'D': Point(0, -1),
+    'R': Point(1, 0),
+}
