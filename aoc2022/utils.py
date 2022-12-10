@@ -1,3 +1,4 @@
+import itertools
 from pathlib import Path
 from typing import NamedTuple
 
@@ -8,7 +9,10 @@ class Answer(NamedTuple):
     part2: int
 
     def __str__(self):
-        return "part1: %s\npart2: %s" % (self.part1, self.part2)
+        def spacer(s):
+            s = str(s)
+            return ("\n" if "\n" in s else " ") + s
+        return "part1:%s\npart2:%s" % (spacer(self.part1), spacer(self.part2))
 
 def input_data(day):
     file = input_dir / f"input{day:02d}.txt"
@@ -33,3 +37,18 @@ DIRS = {
     'D': Point(0, -1),
     'R': Point(1, 0),
 }
+
+def grouper(iterable, n, *, incomplete='fill', fillvalue=None):
+    "Collect data into non-overlapping fixed-length chunks or blocks"
+    # grouper('ABCDEFG', 3, fillvalue='x') --> ABC DEF Gxx
+    # grouper('ABCDEFG', 3, incomplete='strict') --> ABC DEF ValueError
+    # grouper('ABCDEFG', 3, incomplete='ignore') --> ABC DEF
+    args = [iter(iterable)] * n
+    if incomplete == 'fill':
+        return itertools.zip_longest(*args, fillvalue=fillvalue)
+    if incomplete == 'strict':
+        return zip(*args, strict=True)
+    if incomplete == 'ignore':
+        return zip(*args)
+    else:
+        raise ValueError('Expected fill, strict, or ignore')
