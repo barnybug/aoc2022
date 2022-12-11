@@ -1,6 +1,7 @@
 import argparse
 import importlib
 from pathlib import Path
+import timeit
 
 from .utils import input_data
 
@@ -31,11 +32,10 @@ class TextOutput:
         print(answer)
         print()
 
-# run: echo '### Hello world! :rocket:' >> $GITHUB_STEP_SUMMARY
-
 def run():
     parser = argparse.ArgumentParser()
     parser.add_argument("day", nargs="*", type=int)
+    parser.add_argument("--time", action="store_true", help="Time runs")
     parser.add_argument("--markdown", action="store_true", help="Format output in markdown")
     args = parser.parse_args()
 
@@ -56,5 +56,10 @@ def run():
         name = f"aoc2022.day{day:02d}"
         mod = importlib.import_module(name)
         input = input_data(day)
-        answer = mod.solve(input)
-        output.day(day, answer)
+        if args.time:
+            t = timeit.Timer("mod.solve(input)", globals=dict(input=input, mod=mod))
+            (loops, took) = t.autorange()
+            print("%d calls took %.3fs = %.3fs/call" % (loops, took, took/loops))
+        else:
+            answer = mod.solve(input)
+            output.day(day, answer)
