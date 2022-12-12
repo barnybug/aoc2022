@@ -1,3 +1,4 @@
+import enum
 from math import prod
 import re
 from .utils import Answer
@@ -12,33 +13,12 @@ parse = r"""Monkey (\d+):
     If false: throw to monkey (\d+)"""
 
 def compile_op(s):
-    if s == "old * old":
-        return lambda o: o*o
     _, op, b = s.split()
-    b = int(b)
-    if op == '*':
-        return lambda o: o*b
-    if op == '+':
-        return lambda o: o+b
-    raise ValueError(f"unsupported op: {s}")
-
-MODS = list(range(2, 24))
-
-class Item:
-    mods: list[int]
-
-    def __init__(self, mods: list[int]):
-        self.mods = mods
-
-    def __mod__(self, n):
-        return self.mods[MODS.index(n)]
-
-    def apply(self, op):
-        for i, m in enumerate(MODS):
-            self.mods[i] = op(self.mods[i]) % m
-
-def make_item(s):
-    return Item([int(s) % m for m in MODS])
+    if b == "old":
+        op = "**"
+    else:
+        b = int(b)
+    return op, b
 
 @dataclass
 class Monkey:
@@ -48,30 +28,33 @@ class Monkey:
     jumps: int
     inspected: int = 0
 
-def parse_monkey(s, part1):
+def parse_monkey(s):
     m = re.match(parse, s)
     if not m:
         raise ValueError(f"failed to parse: {s}")
     _, items, ops, div, jump_true, jump_false = m.groups()
     op = compile_op(ops)
-    item = int if part1 else make_item
-    items = deque(map(item, items.split(", ")))
+    items = deque(map(int, items.split(", ")))
     return Monkey(items, op, int(div), [int(jump_false), int(jump_true)])
 
 def calc(input: str, rounds: int, part1: bool):
-    global MODS
-    monkeys = [parse_monkey(s, part1) for s in input.split("\n\n")]
-    MODS = [m.div for m in monkeys]
+    monkeys = [parse_monkey(s) for s in input.split("\n\n")]
+    lcm = prod(m.div for m in monkeys)
 
     for _ in range(rounds):
         for monkey in monkeys:
             monkey.inspected += len(monkey.items)
             for item in monkey.items:
+                op, n = monkey.op
+                match op:
+                    case "+":
+                        item = item + n
+                    case "*":
+                        item = item * n
+                    case _:
+                        item = item * item % lcm
                 if part1:
-                    item = monkey.op(item)
                     item //= 3
-                else:
-                    item.apply(monkey.op)
                 jump = monkey.jumps[item % monkey.div == 0]
                 monkeys[jump].items.append(item)
             monkey.items = deque()
