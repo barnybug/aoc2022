@@ -15,10 +15,10 @@ from aoc2022 import day$day
 testdata = open("tests/test$day.txt").read()
 
 def test_01():
-    assert day$day.solve(testdata)[0] == None
+    assert day$day.solve(testdata).part1 == None
 
 def test_02():
-    assert day$day.solve(testdata)[1] == None
+    assert day$day.solve(testdata).part2 == None
 EOF
 fi
 if [ ! -f "$daycode" ]; then
