@@ -51,6 +51,10 @@ class Point(NamedTuple):
     def down(self):
         return Point(self.x, self.y + 1)
 
+Point.L = Point(-1, 0)
+Point.U = Point(0, 1)
+Point.D = Point(0, -1)
+Point.R = Point(1, 0)
 
 DIRS = {
     "L": Point(-1, 0),
