@@ -35,6 +35,9 @@ class Point(NamedTuple):
     def __str__(self):
         return "(%d,%d)" % (self.x, self.y)
 
+    def manhattan(self, p):
+        return abs(self.x-p.x) + abs(self.y-p.y)
+
     @property
     def left(self):
         return Point(self.x - 1, self.y)
