@@ -1,6 +1,6 @@
 from aoc2022 import day06
 
-testdata = open("tests/test06.txt").read()
+testdata = open("tests/input06.txt").read()
 
 def test_01():
     assert day06.find("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 4) == 7

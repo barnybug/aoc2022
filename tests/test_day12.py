@@ -1,6 +1,6 @@
 from aoc2022 import day12
 
-testdata = open("tests/test12.txt").read()
+testdata = open("tests/input12.txt").read()
 
 
 def test_01():

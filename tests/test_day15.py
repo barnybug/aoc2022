@@ -1,6 +1,6 @@
 from aoc2022 import day15
 
-testdata = open("tests/test15.txt").read()
+testdata = open("tests/input15.txt").read()
 
 def test_01():
     readings = day15.parse(testdata)

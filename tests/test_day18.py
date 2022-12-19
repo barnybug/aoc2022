@@ -1,6 +1,6 @@
 from aoc2022 import day18
 
-testdata = open("tests/test18.txt").read()
+testdata = open("tests/input18.txt").read()
 
 def test_01():
     assert day18.solve(testdata).part1 == 64

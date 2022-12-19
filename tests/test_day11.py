@@ -1,6 +1,6 @@
 from aoc2022 import day11
 
-testdata = open("tests/test11.txt").read()
+testdata = open("tests/input11.txt").read()
 
 def test_both_parts():
     answer = day11.solve(testdata)

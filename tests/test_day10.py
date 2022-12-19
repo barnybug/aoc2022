@@ -1,6 +1,6 @@
 from aoc2022 import day10
 
-testdata = open("tests/test10.txt").read()
+testdata = open("tests/input10.txt").read()
 
 def test_01():
     assert day10.solve(testdata).part1 == 13140

@@ -1,7 +1,7 @@
 from aoc2022 import day09
 
-testdata = open("tests/test09.txt").read()
-testdata2 = open("tests/test09-2.txt").read()
+testdata = open("tests/input09.txt").read()
+testdata2 = open("tests/input09-2.txt").read()
 
 def test_01():
     assert day09.solve(testdata).part1 == 13
