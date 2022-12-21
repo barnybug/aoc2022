@@ -5,7 +5,7 @@ sday=$(date +%1d)
 testinput="tests/input$day.txt"
 input="aoc2022/inputs/input$day.txt" 
 daycode="aoc2022/day$day.py"
-testcode="tests/input_day$day.py"
+testcode="tests/test_day$day.py"
 
 touch $testinput $input
 if [ ! -f "$testcode" ]; then
