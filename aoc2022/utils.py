@@ -32,7 +32,7 @@ class Point(NamedTuple):
     def __sub__(self, b):
         return Point(self.x - b.x, self.y - b.y)
 
-    def __str__(self):
+    def __repr__(self):
         return "(%d,%d)" % (self.x, self.y)
 
     def manhattan(self, p):
