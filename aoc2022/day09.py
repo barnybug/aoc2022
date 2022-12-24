@@ -1,7 +1,12 @@
-from .utils import Answer, Point, DIRS
+from .utils import Answer, Point
 
-def sign(x):
-    return -1 if x < 0 else 1 if x > 0 else 0
+DIRS = {
+    "L": Point(-1, 0),
+    "U": Point(0, 1),
+    "D": Point(0, -1),
+    "R": Point(1, 0),
+}
+
 
 def simulate(input: str, length: int):
     rope = [Point(0, 0)] * length
@@ -13,7 +18,7 @@ def simulate(input: str, length: int):
             for i in range(1, length):
                 d = rope[i-1] - rope[i]
                 if abs(d.x) > 1 or abs(d.y) > 1:
-                    rope[i] += Point(sign(d.x), sign(d.y))
+                    rope[i] += d.unit
             visited.add(rope[-1])
     return len(visited)
 

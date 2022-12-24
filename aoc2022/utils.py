@@ -22,6 +22,9 @@ def input_data(day):
     return file.read_text()
 
 
+def sign(i):
+    return -1 if i < 0 else 1 if i > 0 else 0
+
 class Point(NamedTuple):
     x: int
     y: int
@@ -31,9 +34,9 @@ class Point(NamedTuple):
 
     def __sub__(self, b):
         return Point(self.x - b.x, self.y - b.y)
-
+    
     def __mul__(self, a):
-        return Point(self.x * a, self.y * a)
+        return Point(self.x*a, self.y*a)
 
     def __repr__(self):
         return "(%d,%d)" % (self.x, self.y)
@@ -57,18 +60,22 @@ class Point(NamedTuple):
     def down(self):
         return Point(self.x, self.y + 1)
 
+    @property
+    def unit(self):
+        return Point(sign(self.x), sign(self.y))
+
+    @property
+    def turnccw(self):
+        return Point(self.y, -self.x)
+
+    @property
+    def turncw(self):
+        return Point(-self.y, self.x)
+
 Point.L = Point(-1, 0)
 Point.U = Point(0, -1)
 Point.D = Point(0, 1)
 Point.R = Point(1, 0)
-
-DIRS = {
-    "L": Point(-1, 0),
-    "U": Point(0, 1),
-    "D": Point(0, -1),
-    "R": Point(1, 0),
-}
-
 
 def grouper(iterable, n, *, incomplete="fill", fillvalue=None):
     "Collect data into non-overlapping fixed-length chunks or blocks"
