@@ -32,6 +32,9 @@ class Point(NamedTuple):
     def __sub__(self, b):
         return Point(self.x - b.x, self.y - b.y)
 
+    def __mul__(self, a):
+        return Point(self.x * a, self.y * a)
+
     def __repr__(self):
         return "(%d,%d)" % (self.x, self.y)
 
@@ -55,8 +58,8 @@ class Point(NamedTuple):
         return Point(self.x, self.y + 1)
 
 Point.L = Point(-1, 0)
-Point.U = Point(0, 1)
-Point.D = Point(0, -1)
+Point.U = Point(0, -1)
+Point.D = Point(0, 1)
 Point.R = Point(1, 0)
 
 DIRS = {
